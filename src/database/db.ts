@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 
-const db = new sqlite3.Database('./todo.db', (err) => {
+const db = new sqlite3.Database('./src/database/todo.db', (err) => {
   if (err) {
     console.error(`Error opening database ${err.message}`);
   } else {

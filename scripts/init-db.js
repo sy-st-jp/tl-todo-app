@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database("./todo.db", (err) => {
+const db = new sqlite3.Database("./src/database/todo.db", (err) => {
   if (err) {
     return console.error(err.message);
   }
