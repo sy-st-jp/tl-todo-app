@@ -1,16 +1,14 @@
-import Head from "next/head";
+import type { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	return {
+		redirect: {
+			destination: "/todo",
+			permanent: false,
+		},
+	};
+};
 
 export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>tl-todo-app</title>
-        <meta name="description" content="Exam for Timeleap Inc." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main>
-        <p>sample</p>
-      </main>
-    </>
-  );
+	return null;
 }
