@@ -1,3 +1,1 @@
-export default function Todo() {
-	return <h1>/todo</h1>;
-}
+export { Todo as default } from "@/app/pages/todo";
