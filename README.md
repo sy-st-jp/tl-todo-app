@@ -1,4 +1,4 @@
-タイムリープ株式会社のコーディング試験用のリポジトリです。
+# tl-todo-app
 
 ## Getting Started
 
@@ -8,3 +8,6 @@ First, run the development server:
 npm i
 npm run dev
 ```
+
+## Design
+[Figma](https://www.figma.com/design/rybtEYmnBileuMeL7feAQF/tl-todo-app)
