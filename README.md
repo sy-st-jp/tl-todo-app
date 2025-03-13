@@ -1,11 +1,17 @@
 # tl-todo-app
 
-## Getting Started
-
-First, run the development server:
+## Initial Settings
+First, install dependencies and do some initial setup.
 
 ```bash
-npm i
+npm run init
+```
+
+## Getting Started
+
+Second, run the development server:
+
+```bash
 npm run dev
 ```
 
