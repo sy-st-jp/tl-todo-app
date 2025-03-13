@@ -1,1 +1,1 @@
-export { Todo as default } from "@/app/pages/todo";
+export { TodoPage as default } from "@/app/pages/todo-page";
