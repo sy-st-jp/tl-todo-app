@@ -8,7 +8,8 @@
     "start": "next start",
     "test": "jest",
     "check": "npx @biomejs/biome check --apply ./src/**/*.{ts,tsx}",
-    "init-db": "node scripts/init-db.js"
+    "init-db": "node scripts/init-db.js",
+    "gen": "node scripts/generate-api-types.js",
   },
   "dependencies": {
     "@chakra-ui/react": "3.12.0",
