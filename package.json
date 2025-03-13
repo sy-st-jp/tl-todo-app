@@ -11,9 +11,13 @@
     "init-db": "node scripts/init-db.js"
   },
   "dependencies": {
+    "@chakra-ui/react": "3.12.0",
+    "@emotion/react": "11.14.0",
     "next": "14.2.0",
+    "next-themes": "^0.4.6",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.5.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
