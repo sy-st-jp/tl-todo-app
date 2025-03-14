@@ -11,7 +11,7 @@ const featureDirs = fs.readdirSync(featuresDir).filter((dir) => {
 // 各 feature に対して API 型を生成
 featureDirs.forEach((featureName) => {
     const inputPath = path.join(featuresDir, featureName, 'api/openapi/index.yaml');
-    const outputPath = path.join(featuresDir, featureName, 'api/types/schema.d.ts');
+    const outputPath = path.join(featuresDir, featureName, 'api/types/schema/index.d.ts');
 
     if (fs.existsSync(inputPath)) {
         const command = `npx openapi-typescript ${inputPath} -o ${outputPath}`;
