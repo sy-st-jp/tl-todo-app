@@ -1,8 +1,8 @@
-import {createFetcher} from "@/libs/createFetcher";
 import {paths} from "@/features/todo/api/types/schema";
 import {env} from "@/config/env";
+import {createFetchers} from "@/libs/createFetchers";
 
-const todoFetcher = createFetcher(env.TODO_API_HOST)
+const todoFetcher = createFetchers(env.TODO_API_HOST)
 
 // TODO: レスポンスの型を取り出す utility type を作る
 type Response = paths["/api/todos"]["get"]["responses"]["200"]["content"]["application/json"]
