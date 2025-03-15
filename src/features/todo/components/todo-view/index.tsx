@@ -30,7 +30,11 @@ export const TodoView: FC<Props> = (props) => {
                 </WrappedTableRow>
             </WrappedTableHeader>
             <WrappedTableBody>
-                {todos.map((todo, index) => {
+                {todos.length === 0 ? (
+                    <WrappedTableRow>
+                        <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
+                    </WrappedTableRow>
+                ) : todos.map((todo, index) => {
                     const { id, title, completed } = todo
                     return (
                         <WrappedTableRow key={index}>
