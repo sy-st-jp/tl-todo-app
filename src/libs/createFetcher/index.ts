@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig, Method} from "axios";
+import axios, {AxiosRequestConfig, AxiosResponse, Method} from "axios";
 import {RequestConfig} from "./types";
 
 const apiClient = axios.create()
@@ -7,7 +7,7 @@ export const createFetcher = (host: string, sharedHeaders?: AxiosRequestConfig["
     const request = (method: Method) =>
         <Request, Response, Path>(config: RequestConfig<Request, Path>) => {
             const {path, body, query, headers} = config
-            return apiClient.request<Request, Response>({
+            return apiClient.request<AxiosRequestConfig<Request>, AxiosResponse<Response>>({
                 method: method,
                 url: `${host}${path}`,
                 data: body,
