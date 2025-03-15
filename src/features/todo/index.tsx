@@ -1,21 +1,14 @@
 import {TodoView} from "./components/todo-view";
-
-const data = [{
-    id: 1,
-    title: "タスク1",
-    completed: false
-}, {
-    id: 2,
-    title: "タスク2",
-    completed: true
-}, {
-    id: 3,
-    title: "タスク3",
-    completed: true
-}]
+import {useTodo} from "./hooks/useTodo";
 
 export const Todo = () => {
+    const { data, error, isLoading } = useTodo()
+
+    if (error) return <div>error</div>
+    if (isLoading) return <div>loading...</div>
+    if (!data) return <div>タスクなし</div>
+
     return (
-        <TodoView data={data} />
+        <TodoView todos={data} />
     )
 }
