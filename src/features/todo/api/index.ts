@@ -8,6 +8,7 @@ const todoFetcher = createFetcher(env.TODO_API_HOST)
 type Response = paths["/api/todos"]["get"]["responses"]["200"]["content"]["application/json"]
 type Path = keyof paths
 
+// TODO: api client の責務を分割する
 export const getTodos = () => {
     return todoFetcher.get<undefined, Response, Path>({
         path: "/api/todos",
