@@ -9,8 +9,9 @@ type Response = paths["/api/todos"]["get"]["responses"]["200"]["content"]["appli
 type Path = keyof paths
 
 // TODO: api client の責務を分割する
-export const getTodos = () => {
-    return todoFetcher.get<undefined, Response, Path>({
+export const getTodos = async () => {
+    const res = await todoFetcher.get<undefined, Response, Path>({
         path: "/api/todos",
     })
+    return res.data
 }
