@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import {getTodos} from "@/features/todo/api";
+import {getTodos} from "../../api";
 
 export const useTodo = () => {
     const { data, error, isLoading } = useSWR("getTodos", getTodos)
