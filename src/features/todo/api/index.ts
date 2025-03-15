@@ -1,6 +1,3 @@
-import {env} from "@/config/env";
-import {createFetchers} from "@/libs/createFetchers";
-
 const todoFetcher = createFetchers(env.TODO_API_HOST)
 
 // TODO: api client の責務を分割する
