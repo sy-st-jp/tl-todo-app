@@ -11,7 +11,7 @@ import {
 type Todo = {
     id: number;
     title: string;
-    completed: boolean;
+    completed: 0 | 1;
 }
 
 type Props = {
@@ -37,7 +37,7 @@ export const TodoView: FC<Props> = (props) => {
                             <WrappedTableCell>{id}</WrappedTableCell>
                             <WrappedTableCell>{title}</WrappedTableCell>
                             <WrappedTableCell>
-                                <input type="checkbox" checked={completed} readOnly/>
+                                <input type="checkbox" checked={!!completed} readOnly/>
                             </WrappedTableCell>
                         </WrappedTableRow>
                     )
