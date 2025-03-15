@@ -8,18 +8,18 @@ import {
     WrappedTableRow
 } from "@/components/wrapped/chakra-ui/ui/table";
 
-type Data = {
+type Todo = {
     id: number;
     title: string;
     completed: boolean;
 }
 
 type Props = {
-    data: Data[]
+    todos: Todo[]
 }
 
 export const TodoView: FC<Props> = (props) => {
-    const { data } = props
+    const { todos } = props
     return (
         <WrappedTableRoot>
             <WrappedTableHeader>
