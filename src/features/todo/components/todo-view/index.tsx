@@ -30,15 +30,18 @@ export const TodoView: FC<Props> = (props) => {
                 </WrappedTableRow>
             </WrappedTableHeader>
             <WrappedTableBody>
-                {data.map((item, index) => (
-                    <WrappedTableRow key={index}>
-                        <WrappedTableCell>{item.id}</WrappedTableCell>
-                        <WrappedTableCell>{item.title}</WrappedTableCell>
-                        <WrappedTableCell>
-                            <input type="checkbox" checked={item.completed} readOnly/>
-                        </WrappedTableCell>
-                    </WrappedTableRow>
-                ))}
+                {todos.map((todo, index) => {
+                    const { id, title, completed } = todo
+                    return (
+                        <WrappedTableRow key={index}>
+                            <WrappedTableCell>{id}</WrappedTableCell>
+                            <WrappedTableCell>{title}</WrappedTableCell>
+                            <WrappedTableCell>
+                                <input type="checkbox" checked={completed} readOnly/>
+                            </WrappedTableCell>
+                        </WrappedTableRow>
+                    )
+                })}
             </WrappedTableBody>
         </WrappedTableRoot>
     );
