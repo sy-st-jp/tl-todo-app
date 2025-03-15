@@ -15,7 +15,7 @@ type Todo = {
 }
 
 type Props = {
-    todos: Todo[]
+    todos: Todo[];
 }
 
 export const TodoView: FC<Props> = (props) => {
