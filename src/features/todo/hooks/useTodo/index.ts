@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Todo} from "../../types/Todo";
-import {getTodos} from "../../api";
+import {createTodo, getTodos} from "../../api";
 
 export const useTodo = () => {
     const [todos, setTodos] = useState<Todo[]>([])
@@ -14,6 +14,13 @@ export const useTodo = () => {
         setIsLoading(false)
     }
 
+    const handleCreateTodo = async (title: string) => {
+        setIsLoading(true)
+        await createTodo({title})
+        await handleGetTodos()
+        setIsLoading(false)
+    }
+
     useEffect(() => {
         handleGetTodos()
     },[])
@@ -21,6 +28,7 @@ export const useTodo = () => {
     return {
         todos,
         isLoading,
-        errorMessage
+        errorMessage,
+        handleCreateTodo
     }
 }
