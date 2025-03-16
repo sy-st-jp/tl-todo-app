@@ -2,13 +2,13 @@ import {TodoView} from "./components/todo-view";
 import {useTodo} from "./hooks/useTodo";
 
 export const Todo = () => {
-    const { data, error, isLoading } = useTodo()
+    const { todos, errorMessage, isLoading } = useTodo()
 
-    if (error) return <div>error</div>
+    if (errorMessage) return <div>{errorMessage}</div>
     if (isLoading) return <div>loading...</div>
-    if (!data) return <div>タスクなし</div>
+    if (!todos) return <div>タスクなし</div>
 
     return (
-        <TodoView todos={data} />
+        <TodoView todos={todos} />
     )
 }

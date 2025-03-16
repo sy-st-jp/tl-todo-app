@@ -1,12 +1,26 @@
-import useSWR from "swr";
+import {useEffect, useState} from "react";
+import {Todo} from "../../types/Todo";
 import {getTodos} from "../../api";
-import {GetTodosResponse} from "../../api/types";
 
 export const useTodo = () => {
-    const { data, error, isLoading } = useSWR<GetTodosResponse>("getTodos", getTodos)
+    const [todos, setTodos] = useState<Todo[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [errorMessage, setErrorMessage] = useState<string|null>(null)
+
+    const handleGetTodos = async () => {
+        setIsLoading(true)
+        const todos = await getTodos();
+        setTodos(todos)
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        handleGetTodos()
+    },[])
+
     return {
-        data,
-        error,
-        isLoading
+        todos,
+        isLoading,
+        errorMessage
     }
 }
