@@ -8,6 +8,7 @@ import {
     WrappedTableRow
 } from "@/components/wrapped/chakra-ui/ui/table";
 import type {Todo} from "../../types/Todo";
+import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 
 type Props = {
     todos: Todo[];
@@ -29,18 +30,8 @@ export const TodoView: FC<Props> = (props) => {
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => {
-                    const { id, title, completed } = todo
-                    return (
-                        <WrappedTableRow key={index}>
-                            <WrappedTableCell>{id}</WrappedTableCell>
-                            <WrappedTableCell>{title}</WrappedTableCell>
-                            <WrappedTableCell>
-                                <input type="checkbox" checked={!!completed} readOnly/>
-                            </WrappedTableCell>
-                        </WrappedTableRow>
-                    )
-                })}
+                ) : todos.map((todo, index) => <TodoItem key={todo.id} {...todo} />)
+                })
             </WrappedTableBody>
         </WrappedTableRoot>
     );
