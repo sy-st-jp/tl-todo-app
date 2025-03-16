@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {ComponentProps, FC} from "react";
 import {
     WrappedTableBody,
     WrappedTableCell,
@@ -8,15 +8,20 @@ import {
     WrappedTableRow
 } from "@/components/wrapped/chakra-ui/ui/table";
 import type {Todo} from "../../types/Todo";
+import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
 import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 
 type Props = {
     todos: Todo[];
+    isLoading: boolean;
+    onClickCreateButton: ComponentProps<typeof CreateItemDialog>["onClickCreateButton"]
 }
 
 export const TodoView: FC<Props> = (props) => {
-    const { todos } = props
+    const { todos, isLoading, onClickCreateButton } = props
     return (
+        <>
+        <CreateItemDialog isLoading={isLoading} onClickCreateButton={onClickCreateButton}/>
         <WrappedTableRoot>
             <WrappedTableHeader>
                 <WrappedTableRow>
@@ -34,5 +39,6 @@ export const TodoView: FC<Props> = (props) => {
                 })
             </WrappedTableBody>
         </WrappedTableRoot>
+        </>
     );
 }
