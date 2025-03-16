@@ -36,7 +36,7 @@ export const TodoView: FC<Props> = (props) => {
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
                 ) : todos.map((todo, index) => <TodoItem key={todo.id} {...todo} />)
-                })
+                }
             </WrappedTableBody>
         </WrappedTableRoot>
         </>
