@@ -1,2 +1,3 @@
 import {getTodos} from "./modules/getTodos";
-export {getTodos}
+import {createTodo} from "./modules/createTodo";
+export {getTodos, createTodo}
