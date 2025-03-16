@@ -7,12 +7,7 @@ import {
     WrappedTableRoot,
     WrappedTableRow
 } from "@/components/wrapped/chakra-ui/ui/table";
-
-type Todo = {
-    id: number;
-    title: string;
-    completed: 0 | 1;
-}
+import type {Todo} from "../../types/Todo";
 
 type Props = {
     todos: Todo[];
