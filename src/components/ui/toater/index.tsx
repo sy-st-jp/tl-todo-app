@@ -14,11 +14,15 @@ const toaster = createToaster({
     pauseOnPageIdle: true,
 })
 
+const duration = 3000;
+const errorDuration = 5000;
+
 const wrappedCreateToast = (title?: string, description?: string, type?: ViewType) => {
     toaster.create({
         title,
         description,
-        type
+        type,
+        duration: type === "error" ? errorDuration : duration
     })
 }
 
