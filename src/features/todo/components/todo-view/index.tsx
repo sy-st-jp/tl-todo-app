@@ -12,16 +12,27 @@ import {CreateItemDialog} from "@/features/todo/components/todo-view/components/
 import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 
 type Props = {
-    todos: Todo[];
-    isLoading: boolean;
-    onClickCreateButton: ComponentProps<typeof CreateItemDialog>["onClickCreateButton"]
+    todos?: Todo[];
+    operations: {
+        getTodos: {
+            isLoading: boolean;
+            errorMessage?: string;
+        },
+        createTodo: {
+            isLoading: boolean;
+            errorMessage?: string;
+            handler: (title: string) => void;
+        },
+    }
 }
 
 export const TodoView: FC<Props> = (props) => {
-    const { todos, isLoading, onClickCreateButton } = props
+    const { todos, operations } = props
+    const { getTodos, createTodo } = operations
+    if (getTodos.isLoading) return <div>loading...</div>
     return (
         <>
-        <CreateItemDialog isLoading={isLoading} onClickCreateButton={onClickCreateButton}/>
+        <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler}/>
         <WrappedTableRoot>
             <WrappedTableHeader>
                 <WrappedTableRow>
@@ -31,7 +42,7 @@ export const TodoView: FC<Props> = (props) => {
                 </WrappedTableRow>
             </WrappedTableHeader>
             <WrappedTableBody>
-                {todos.length === 0 ? (
+                {todos?.length === 0 || !todos ? (
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
