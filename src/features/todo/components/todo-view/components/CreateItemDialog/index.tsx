@@ -1,4 +1,4 @@
-import {CloseButton, Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
+import {Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
 import {FC} from "react";
 import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
 import {useInput} from "@/libs/useInput";
@@ -48,12 +48,10 @@ export const CreateItemDialog: FC<Props> = (props) => {
                                 <Input value={title} onChange={handleChangeTitle}/>
                             </Dialog.Body>
                             <Dialog.Footer>
+                                <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
                                 <WrappedButton disabled={!title.length} onClick={handleClickCreateButton}>作成</WrappedButton>
                             </Dialog.Footer>
                             {error.message && <p>{error.message}</p>}
-                            <Dialog.CloseTrigger asChild>
-                                <CloseButton size="sm" />
-                            </Dialog.CloseTrigger>
                         </>}
                     </Dialog.Content>
                 </Dialog.Positioner>
