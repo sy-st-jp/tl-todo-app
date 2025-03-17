@@ -16,9 +16,8 @@ export const useCreateTodo = (mutate: KeyedMutator<Todo[]>) => {
             toast.create("タスクを作成しました", undefined, "success")
             await mutate()
         },
-        onError: (error) => {
-            toast.create("タスクの作成に失敗しました", "時間を置いて再度お試しください。解決しない場合は、こちらにお問い合わせください。(https://...)", "error")
-            setErrorMessage(error.message)
+        onError: () => {
+            setErrorMessage("タスクの作成に失敗しました。時間を置いて再度お試しください。")
         }
     })
     const handleCreateTodo = async (title: string) => {
