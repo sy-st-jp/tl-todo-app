@@ -31,7 +31,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
         }
     }
     return (
-        <Dialog.Root>
+        <Dialog.Root open={isOpen} onOpenChange={handleToggle}>
             <Dialog.Trigger asChild>
                 <WrappedButton variant="outline" size="sm">
                     新規作成
