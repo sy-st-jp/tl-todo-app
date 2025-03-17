@@ -8,4 +8,9 @@ export type CreateTodoRequest = paths["/api/todos"]["post"]["requestBody"]["cont
 export type CreateTodoResponse = paths["/api/todos"]["post"]["responses"]["201"]["content"]["application/json"]
 export type CreateTodo = (request: CreateTodoRequest) => Promise<CreateTodoResponse>
 
+export type UpdateTodoRequest = paths["/api/todos"]["put"]["requestBody"]["content"]["application/json"]
+export type UpdateTodoPathParam = paths["/api/todos"]["put"]["parameters"]["path"]
+export type UpdateTodoResponse = paths["/api/todos"]["put"]["responses"]["200"]["content"]["application/json"]
+export type UpdateTodo = (request: UpdateTodoRequest, param: UpdateTodoPathParam) => Promise<UpdateTodoResponse>
+
 export type Path = keyof paths
