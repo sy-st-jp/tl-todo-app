@@ -57,7 +57,7 @@ export const UpdateItemDialog: FC<Props> = (props) => {
                                 </Dialog.Body>
                                 <Dialog.Footer>
                                     <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
-                                    <WrappedButton disabled={!currentTitle.length} onClick={handleClickUpdateButton}>作成</WrappedButton>
+                                    <WrappedButton disabled={!currentTitle.length} onClick={handleClickUpdateButton}>更新</WrappedButton>
                                 </Dialog.Footer>
                                 {error.message && <p>{error.message}</p>}
                             </>}
