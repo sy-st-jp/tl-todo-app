@@ -32,10 +32,10 @@ type Props = {
 export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
     const { getTodos, createTodo } = operations
-    if (getTodos.isLoading) return <div>loading...</div>
     return (
         <>
         <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
+        {getTodos.isLoading ? <div>loading...</div> :
         <WrappedTableRoot>
             <WrappedTableHeader>
                 <WrappedTableRow>
@@ -52,7 +52,7 @@ export const TodoView: FC<Props> = (props) => {
                 ) : todos.map((todo, index) => <TodoItem key={todo.id} {...todo} />)
                 }
             </WrappedTableBody>
-        </WrappedTableRoot>
+        </WrappedTableRoot>}
         </>
     );
 }
