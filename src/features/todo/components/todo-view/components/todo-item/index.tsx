@@ -1,10 +1,9 @@
 import {WrappedTableCell, WrappedTableRow} from "@/components/wrapped/chakra-ui/ui/table";
 import React, {FC} from "react";
+import {Todo} from "@/features/todo/types/Todo";
 
 type Props = {
-    id: number;
-    title: string;
-    completed: 0 | 1;
+    todo: Todo
 }
 
 export const TodoItem: FC<Props> = (props) => {
