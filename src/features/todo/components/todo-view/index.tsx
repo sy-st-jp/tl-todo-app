@@ -20,8 +20,11 @@ type Props = {
         },
         createTodo: {
             isLoading: boolean;
-            errorMessage?: string;
-            handler: (title: string) => void;
+            error: {
+              message?: string,
+              handleClear: () => void
+            },
+            handler: (title: string) => Promise<void>;
         },
     }
 }
@@ -32,7 +35,7 @@ export const TodoView: FC<Props> = (props) => {
     if (getTodos.isLoading) return <div>loading...</div>
     return (
         <>
-        <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler}/>
+        <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
         <WrappedTableRoot>
             <WrappedTableHeader>
                 <WrappedTableRow>

@@ -15,7 +15,10 @@ export const useTodo = () => {
             },
             createTodo: {
                 isLoading: createTodo.isLoading,
-                errorMessage: createTodo.error?.message,
+                error: {
+                    message: createTodo.error.message,
+                    handleClear: createTodo.error.handleClear
+                },
                 handler: createTodo.handler
             },
         },

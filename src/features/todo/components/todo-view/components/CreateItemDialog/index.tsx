@@ -5,16 +5,20 @@ import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
 type Props = {
     onClickCreateButton: (title: string) => void
     isLoading: boolean
+    error: {
+        message?: string
+        handleClear: () => void
+    }
 }
 
 export const CreateItemDialog: FC<Props> = (props) => {
-    const { onClickCreateButton, isLoading } = props
     const [title, setTitle] = useState<string>("")
     const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
     const handleClickCreateButton = () => {
         onClickCreateButton(title)
+    const { onClickCreateButton, isLoading, error } = props
     }
     return (
         <Dialog.Root>
@@ -36,6 +40,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
                             <Dialog.Footer>
                                 <WrappedButton disabled={!title.length} onClick={handleClickCreateButton}>作成</WrappedButton>
                             </Dialog.Footer>
+                            {error.message && <p>{error.message}</p>}
                             <Dialog.CloseTrigger asChild>
                                 <CloseButton size="sm" />
                             </Dialog.CloseTrigger>
