@@ -82,8 +82,6 @@ paths:
           description: "入力値が不正"
         500:
           description: "予期しないエラー"
-
-  /api/todos/{id}:
     put:
       tags:
         - "todos"
@@ -133,6 +131,7 @@ paths:
         500:
           description: "予期しないエラー"
 
+  /api/todos/{id}:
     delete:
       tags:
         - "todos"
