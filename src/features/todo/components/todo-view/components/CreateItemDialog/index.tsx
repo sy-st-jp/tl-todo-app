@@ -1,5 +1,5 @@
 import {CloseButton, Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
-import {ChangeEvent, FC, useState} from "react";
+import {FC} from "react";
 import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
