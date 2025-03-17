@@ -1,9 +1,11 @@
 import {CloseButton, Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
 import {ChangeEvent, FC, useState} from "react";
 import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
+import {useInput} from "@/libs/useInput";
+import {useOpen} from "@/libs/useOpen";
 
 type Props = {
-    onClickCreateButton: (title: string) => void
+    onClickCreateButton: (title: string) => Promise<void>
     isLoading: boolean
     error: {
         message?: string
@@ -12,13 +14,21 @@ type Props = {
 }
 
 export const CreateItemDialog: FC<Props> = (props) => {
-    const [title, setTitle] = useState<string>("")
-    const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value)
-    }
-    const handleClickCreateButton = () => {
-        onClickCreateButton(title)
     const { onClickCreateButton, isLoading, error } = props
+
+    const {value: title, handleChange: handleChangeTitle, handleClear: handleClearTitle} = useInput("")
+    const { isOpen, handleToggle} = useOpen(() => {
+        handleClearTitle()
+        error.handleClear()
+    })
+
+    const handleClickCreateButton = async () => {
+        try {
+            await onClickCreateButton(title)
+            handleToggle()
+        } catch (e) {
+            // do nothing
+        }
     }
     return (
         <Dialog.Root>
