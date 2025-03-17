@@ -16,9 +16,9 @@ type Props = {
 export const CreateItemDialog: FC<Props> = (props) => {
     const { onClickCreateButton, isLoading, error } = props
 
-    const {value: title, handleChange: handleChangeTitle, handleClear: handleClearTitle} = useInput("")
+    const {value: title, handleChange: handleChangeTitle, handleReset: handleResetTitle} = useInput("")
     const { isOpen, handleToggle} = useOpen(() => {
-        handleClearTitle()
+        handleResetTitle("")
         error.handleClear()
     })
 
