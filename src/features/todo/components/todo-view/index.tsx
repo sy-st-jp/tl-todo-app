@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {ComponentProps, FC} from "react";
 import {
     WrappedTableBody,
     WrappedTableCell,
@@ -8,14 +8,34 @@ import {
     WrappedTableRow
 } from "@/components/wrapped/chakra-ui/ui/table";
 import type {Todo} from "../../types/Todo";
+import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
+import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 
 type Props = {
-    todos: Todo[];
+    todos?: Todo[];
+    operations: {
+        getTodos: {
+            isLoading: boolean;
+            errorMessage?: string;
+        },
+        createTodo: {
+            isLoading: boolean;
+            error: {
+              message?: string,
+              handleClear: () => void
+            },
+            handler: (title: string) => Promise<void>;
+        },
+    }
 }
 
 export const TodoView: FC<Props> = (props) => {
-    const { todos } = props
+    const { todos, operations } = props
+    const { getTodos, createTodo } = operations
     return (
+        <>
+        <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
+        {getTodos.isLoading ? <div>loading...</div> :
         <WrappedTableRoot>
             <WrappedTableHeader>
                 <WrappedTableRow>
@@ -25,23 +45,14 @@ export const TodoView: FC<Props> = (props) => {
                 </WrappedTableRow>
             </WrappedTableHeader>
             <WrappedTableBody>
-                {todos.length === 0 ? (
+                {todos?.length === 0 || !todos ? (
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => {
-                    const { id, title, completed } = todo
-                    return (
-                        <WrappedTableRow key={index}>
-                            <WrappedTableCell>{id}</WrappedTableCell>
-                            <WrappedTableCell>{title}</WrappedTableCell>
-                            <WrappedTableCell>
-                                <input type="checkbox" checked={!!completed} readOnly/>
-                            </WrappedTableCell>
-                        </WrappedTableRow>
-                    )
-                })}
+                ) : todos.map((todo, index) => <TodoItem key={todo.id} {...todo} />)
+                }
             </WrappedTableBody>
-        </WrappedTableRoot>
+        </WrappedTableRoot>}
+        </>
     );
 }
