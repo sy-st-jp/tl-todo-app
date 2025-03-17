@@ -1,34 +1,23 @@
-import {useEffect, useState} from "react";
-import {Todo} from "../../types/Todo";
-import {createTodo, getTodos} from "../../api";
+import {getTodos} from "../../api";
+import useSWR from "swr";
+import {useCreateTodo} from "@/features/todo/hooks/useTodo/modules/useCreateTodo";
+import {Todo} from "@/features/todo/types/Todo";
 
 export const useTodo = () => {
-    const [todos, setTodos] = useState<Todo[]>([])
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [errorMessage, setErrorMessage] = useState<string|null>(null)
-
-    const handleGetTodos = async () => {
-        setIsLoading(true)
-        const todos = await getTodos();
-        setTodos(todos)
-        setIsLoading(false)
-    }
-
-    const handleCreateTodo = async (title: string) => {
-        setIsLoading(true)
-        await createTodo({title})
-        await handleGetTodos()
-        setIsLoading(false)
-    }
-
-    useEffect(() => {
-        handleGetTodos()
-    },[])
-
+    const {data, error: getTodosError, isLoading, isValidating, mutate} = useSWR<Todo[], Error, "getTodos">("getTodos", getTodos)
+    const createTodo = useCreateTodo(mutate)
     return {
-        todos,
-        isLoading,
-        errorMessage,
-        handleCreateTodo
+        todos: data,
+        operations: {
+            getTodos: {
+                isLoading: isValidating || isLoading,
+                errorMessage: getTodosError?.message,
+            },
+            createTodo: {
+                isLoading: createTodo.isLoading,
+                errorMessage: createTodo.error?.message,
+                handler: createTodo.handler
+            },
+        },
     }
 }
