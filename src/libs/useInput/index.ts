@@ -5,12 +5,12 @@ export const useInput = (initialValue: string) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
-    const handleClear = () => {
-        setValue("")
+    const handleReset = (value: string) => {
+        setValue(value)
     }
     return {
         value,
         handleChange,
-        handleClear,
+        handleReset,
     }
 }

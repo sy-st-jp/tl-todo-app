@@ -5,10 +5,10 @@ const apiClient = axios.create()
 
 export const createFetcher: CreateFetcher = (host, method, sharedHeaders?) =>
     <Request, Response, Path>(config: RequestConfig<Request, Path>) => {
-        const {path, body, query, headers} = config
+        const {path, body, pathParam, query, headers} = config
         return apiClient.request<AxiosRequestConfig<Request>, AxiosResponse<Response>>({
             method: method,
-            url: `${host}${path}`,
+            url: pathParam ? `${host}${path}/${pathParam}` : `${host}${path}`,
             data: body,
             params: query,
             headers: {

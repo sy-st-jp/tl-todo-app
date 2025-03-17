@@ -1,4 +1,4 @@
-import React, {ComponentProps, FC} from "react";
+import React, {FC} from "react";
 import {
     WrappedTableBody,
     WrappedTableCell,
@@ -26,12 +26,20 @@ type Props = {
             },
             handler: (title: string) => Promise<void>;
         },
+        updateTodo: {
+            isLoading: boolean;
+            error: {
+              message?: string,
+              handleClear: () => void
+            },
+            handler: (id: number, title?: string, completed?: boolean) => Promise<void>;
+        }
     }
 }
 
 export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
-    const { getTodos, createTodo } = operations
+    const { getTodos, createTodo, updateTodo } = operations
     return (
         <>
         <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
@@ -49,7 +57,7 @@ export const TodoView: FC<Props> = (props) => {
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => <TodoItem key={todo.id} {...todo} />)
+                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} />)
                 }
             </WrappedTableBody>
         </WrappedTableRoot>}
