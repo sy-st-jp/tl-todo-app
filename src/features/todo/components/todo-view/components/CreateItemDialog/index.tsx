@@ -45,7 +45,10 @@ export const CreateItemDialog: FC<Props> = (props) => {
                         <>
                             <Dialog.Header/>
                             <Dialog.Body>
-                                <Input value={title} onChange={handleChangeTitle}/>
+                                <label>
+                                    <p>タイトル</p>
+                                    <Input value={title} onChange={handleChangeTitle}/>
+                                </label>
                             </Dialog.Body>
                             <Dialog.Footer>
                                 <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
