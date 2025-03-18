@@ -33,7 +33,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
     return (
         <Dialog.Root open={isOpen} onOpenChange={handleToggle} placement={"center"}>
             <Dialog.Trigger asChild>
-                <WrappedButton maxW={"120px"} size={"sm"} variant="outline">
+                <WrappedButton variant={"solid"}>
                     新規作成
                 </WrappedButton>
             </Dialog.Trigger>
@@ -49,8 +49,8 @@ export const CreateItemDialog: FC<Props> = (props) => {
                                 </label>
                             </Dialog.Body>
                             <Dialog.Footer display={"flex"} justifyContent={"center"} gap={8}>
-                                <WrappedButton onClick={handleToggle} w={"120px"}>キャンセル</WrappedButton>
-                                <WrappedButton disabled={!title.length} onClick={handleClickCreateButton} w={"120px"}>作成</WrappedButton>
+                                <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
+                                <WrappedButton variant={"solid"} disabled={!title.length} onClick={handleClickCreateButton}>作成</WrappedButton>
                             </Dialog.Footer>
                             {isLoading && <Box position={"absolute"} top={0} right={0} left={0} bottom={0} bg={"whiteAlpha.300"} animationName={"fade-in"} animationDuration={"slow"} zIndex={1} display={"flex"} justifyContent={"center"} alignItems={"center"} cursor={"disabled"}><Spinner size="lg"/></Box>}
                             {error.message && <Text color={"fg.error"}>{error.message}</Text>}

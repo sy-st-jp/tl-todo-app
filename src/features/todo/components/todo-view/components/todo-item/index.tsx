@@ -3,7 +3,7 @@ import React, {ChangeEvent, FC} from "react";
 import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/UpdateItemDialog";
 import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
-import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
+import {WrappedButton} from "../../../../../../components/ui/button";
 
 type Props = {
     todo: Todo
@@ -58,7 +58,7 @@ export const TodoItem: FC<Props> = (props) => {
             </WrappedTableCell>
             <WrappedTableCell display={"flex"} justifyContent={"end"} gap={4}>
                 <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
-                <WrappedButton variant="outline" px={8} size="sm" onClick={handleDelete}>
+                <WrappedButton variant={"danger"} onClick={handleDelete}>
                     削除
                 </WrappedButton>
             </WrappedTableCell>
