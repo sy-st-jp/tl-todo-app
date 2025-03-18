@@ -66,7 +66,7 @@ export const TodoView: FC<Props> = (props) => {
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} />)
+                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />)
                 }
             </WrappedTableBody>
         </WrappedTableRoot>}
