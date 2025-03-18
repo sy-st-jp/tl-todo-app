@@ -10,6 +10,7 @@ import {
 import type {Todo} from "../../types/Todo";
 import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
 import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
+import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 
 type Props = {
     todos?: Todo[];
@@ -32,7 +33,7 @@ type Props = {
               message?: string,
               handleClear: () => void
             },
-            handler: (id: number, title?: string, completed?: boolean) => Promise<void>;
+            handler: (config: UpdateConfig) => Promise<void>;
         }
     }
 }
