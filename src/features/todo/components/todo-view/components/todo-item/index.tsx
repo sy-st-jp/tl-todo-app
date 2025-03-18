@@ -5,6 +5,7 @@ import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 import {Button} from "@/components/ui/Button";
 import {Checkbox} from "@/components/ui/Checkbox";
+import {HStack} from "@/components/layout/Stack";
 
 type Props = {
     todo: Todo
@@ -57,11 +58,13 @@ export const TodoItem: FC<Props> = (props) => {
             <WrappedTableCell>
                 <Checkbox checked={!!completed} onChange={handleCompleted}/>
             </WrappedTableCell>
-            <WrappedTableCell display={"flex"} justifyContent={"end"} gap={4}>
-                <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
-                <Button variant={"danger"} onClick={handleDelete}>
-                    削除
-                </Button>
+            <WrappedTableCell>
+                <HStack gap={24} justifyContent={"flex-end"}>
+                    <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
+                    <Button variant={"danger"} onClick={handleDelete}>
+                        削除
+                    </Button>
+                </HStack>
             </WrappedTableCell>
         </WrappedTableRow>
     )

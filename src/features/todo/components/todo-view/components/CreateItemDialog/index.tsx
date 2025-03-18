@@ -3,6 +3,7 @@ import {FC} from "react";
 import {Button} from "@/components/ui/Button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
+import {VStack} from "@/components/layout/Stack";
 
 type Props = {
     onClickCreateButton: (title: string) => Promise<void>
@@ -41,7 +42,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
                 <Dialog.Backdrop/>
                 <Dialog.Positioner>
                     <Dialog.Content p={8}>
-                        <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} gap={6}>
+                        <VStack gap={24}>
                             <Dialog.Body>
                                 <label>
                                     <Text mb={2}>タイトル</Text>
@@ -54,7 +55,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
                             </Dialog.Footer>
                             {isLoading && <Box position={"absolute"} top={0} right={0} left={0} bottom={0} bg={"whiteAlpha.300"} animationName={"fade-in"} animationDuration={"slow"} zIndex={1} display={"flex"} justifyContent={"center"} alignItems={"center"} cursor={"disabled"}><Spinner size="lg"/></Box>}
                             {error.message && <Text color={"fg.error"}>{error.message}</Text>}
-                        </Box>
+                        </VStack>
                     </Dialog.Content>
                 </Dialog.Positioner>
             </Portal>

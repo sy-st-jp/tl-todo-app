@@ -11,7 +11,7 @@ import type {Todo} from "../../types/Todo";
 import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
 import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
-import {Box} from "@chakra-ui/react";
+import {VStack} from "@/components/layout/Stack";
 
 type Props = {
     todos?: Todo[];
@@ -51,7 +51,7 @@ export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
     const { getTodos, createTodo, updateTodo, deleteTodo } = operations
     return (
-        <Box display={"flex"} flexDirection={"column"} gap={8}>
+        <VStack gap={24}>
             <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
             {getTodos.isLoading ? <div>loading...</div> :
             <WrappedTableRoot>
@@ -72,6 +72,6 @@ export const TodoView: FC<Props> = (props) => {
                     }
                 </WrappedTableBody>
             </WrappedTableRoot>}
-        </Box>
+        </VStack>
     );
 }
