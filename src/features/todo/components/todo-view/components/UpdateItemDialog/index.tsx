@@ -4,10 +4,11 @@ import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 import {Todo} from "@/features/todo/types/Todo";
+import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 
 type Props = {
     todo: Todo
-    onClickUpdateButton:  (id: number, title?: string, completed?: boolean) => Promise<void>
+    onClickUpdateButton:  (config: UpdateConfig) => Promise<void>
     isLoading: boolean
     error: {
         message?: string
@@ -17,7 +18,7 @@ type Props = {
 
 export const UpdateItemDialog: FC<Props> = (props) => {
     const { todo, onClickUpdateButton, isLoading, error } = props
-    const { id, title, completed } = todo
+    const { id, title } = todo
 
     const [initialTitle] = useState<string>(title)
 
@@ -29,7 +30,11 @@ export const UpdateItemDialog: FC<Props> = (props) => {
 
     const handleClickUpdateButton = async () => {
         try {
-            await onClickUpdateButton(id, currentTitle, !!completed)
+            await onClickUpdateButton({
+                type: "title",
+                id: id,
+                title: currentTitle
+            })
             handleToggle()
         } catch (e) {
             // do nothing
