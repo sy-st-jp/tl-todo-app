@@ -4,6 +4,7 @@ import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/
 import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 import {Button} from "@/components/ui/button";
+import {Checkbox} from "@/components/ui/Checkbox";
 
 type Props = {
     todo: Todo
@@ -54,7 +55,7 @@ export const TodoItem: FC<Props> = (props) => {
             <WrappedTableCell>{id}</WrappedTableCell>
             <WrappedTableCell>{title}</WrappedTableCell>
             <WrappedTableCell>
-                <input type="checkbox" checked={!!completed} onChange={handleCompleted}/>
+                <Checkbox checked={!!completed} onChange={handleCompleted}/>
             </WrappedTableCell>
             <WrappedTableCell display={"flex"} justifyContent={"end"} gap={4}>
                 <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
