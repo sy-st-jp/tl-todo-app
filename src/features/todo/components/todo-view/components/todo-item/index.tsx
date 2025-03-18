@@ -3,6 +3,7 @@ import React, {ChangeEvent, FC} from "react";
 import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/UpdateItemDialog";
 import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
+import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
 
 type Props = {
     todo: Todo
@@ -13,6 +14,14 @@ type Props = {
             handleClear: () => void
         },
         handler: (config: UpdateConfig) => Promise<void>;
+    },
+    deleteTodo: {
+        isLoading: boolean;
+        error: {
+            message?: string,
+            handleClear: () => void
+        },
+        handler: (id: number) => Promise<void>;
     }
 }
 
@@ -32,6 +41,14 @@ export const TodoItem: FC<Props> = (props) => {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            await props.deleteTodo.handler(id)
+        } catch (e) {
+            // do nothing
+        }
+    }
+
     return (
         <WrappedTableRow>
             <WrappedTableCell>{id}</WrappedTableCell>
@@ -40,6 +57,9 @@ export const TodoItem: FC<Props> = (props) => {
                 <input type="checkbox" checked={!!completed} onChange={handleCompleted}/>
             </WrappedTableCell>
             <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
+            <WrappedButton variant="outline" size="sm" onClick={handleDelete}>
+                削除
+            </WrappedButton>
         </WrappedTableRow>
     )
 }

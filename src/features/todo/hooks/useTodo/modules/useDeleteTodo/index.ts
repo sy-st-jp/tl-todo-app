@@ -1,0 +1,42 @@
+import useSWRMutation from "swr/mutation";
+import {
+    DeleteTodoPathParam, DeleteTodoResponse,
+} from "@/features/todo/api/types";
+import {Todo} from "@/features/todo/types/Todo";
+import {KeyedMutator} from "swr";
+import {useState} from "react";
+import {toast} from "@/components/ui/toater";
+import {deleteTodo} from "@/features/todo/api/modules/deleteTodo";
+
+export const useDeleteTodo = (mutate: KeyedMutator<Todo[]>) => {
+    const [errorMessage, setErrorMessage] = useState<string>()
+
+    const {trigger, isMutating, error} = useSWRMutation<DeleteTodoResponse, Error, "deleteTodo", {param: DeleteTodoPathParam}, DeleteTodoResponse>("deleteTodo", async (key, {arg}) => {
+        return await deleteTodo(arg.param)
+    })
+
+    const handleDeleteTodo = async (id: number) => {
+        await trigger({param: {id: id}},{
+            onSuccess: async () => {
+                toast.create("タスクを削除しました", undefined, "success")
+                await mutate()
+            },
+            onError: () => {
+                toast.create("タスクの削除に失敗しました。時間を置いて再度お試しください。", undefined, "error")
+            }
+        })
+    }
+
+    const handleClearErrorMessage = () => {
+        setErrorMessage(undefined)
+    }
+
+    return {
+        handler: handleDeleteTodo,
+        isLoading: isMutating,
+        error: {
+            message: errorMessage,
+            handleClear: handleClearErrorMessage
+        }
+    }
+}

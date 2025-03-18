@@ -3,11 +3,13 @@ import useSWR from "swr";
 import {useCreateTodo} from "@/features/todo/hooks/useTodo/modules/useCreateTodo";
 import {Todo} from "@/features/todo/types/Todo";
 import {useUpdateTodo} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo";
+import {useDeleteTodo} from "@/features/todo/hooks/useTodo/modules/useDeleteTodo";
 
 export const useTodo = () => {
     const {data, error: getTodosError, isLoading, isValidating, mutate} = useSWR<Todo[], Error, "getTodos">("getTodos", getTodos)
     const createTodo = useCreateTodo(mutate)
     const updateTodo = useUpdateTodo(data, mutate)
+    const deleteTodo = useDeleteTodo(mutate)
     return {
         todos: data,
         operations: {
@@ -30,6 +32,14 @@ export const useTodo = () => {
                     handleClear: updateTodo.error.handleClear
                 },
                 handler: updateTodo.handler
+            },
+            deleteTodo: {
+                isLoading: deleteTodo.isLoading,
+                error: {
+                    message: deleteTodo.error.message,
+                    handleClear: deleteTodo.error.handleClear
+                },
+                handler: deleteTodo.handler
             }
         },
     }

@@ -34,13 +34,21 @@ type Props = {
               handleClear: () => void
             },
             handler: (config: UpdateConfig) => Promise<void>;
+        },
+        deleteTodo: {
+            isLoading: boolean;
+            error: {
+              message?: string,
+              handleClear: () => void
+            },
+            handler: (id: number) => Promise<void>;
         }
     }
 }
 
 export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
-    const { getTodos, createTodo, updateTodo } = operations
+    const { getTodos, createTodo, updateTodo, deleteTodo } = operations
     return (
         <>
         <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
@@ -58,7 +66,7 @@ export const TodoView: FC<Props> = (props) => {
                     <WrappedTableRow>
                         <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} />)
+                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />)
                 }
             </WrappedTableBody>
         </WrappedTableRoot>}
