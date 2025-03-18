@@ -3,7 +3,7 @@ import React, {ChangeEvent, FC} from "react";
 import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/UpdateItemDialog";
 import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 import {Checkbox} from "@/components/ui/Checkbox";
 
 type Props = {

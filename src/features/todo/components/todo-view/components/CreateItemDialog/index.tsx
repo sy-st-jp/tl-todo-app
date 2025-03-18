@@ -1,6 +1,6 @@
 import {Box, Dialog, Input, Portal, Spinner, Text} from "@chakra-ui/react";
 import {FC} from "react";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 

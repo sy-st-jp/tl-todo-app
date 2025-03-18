@@ -1,6 +1,6 @@
 import {Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
 import {FC, useState} from "react";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 import {Todo} from "@/features/todo/types/Todo";
