@@ -1,4 +1,4 @@
-import {Button} from "@chakra-ui/react";
+import {Button as ChakraButton} from "@chakra-ui/react";
 import {FC, PropsWithChildren} from "react";
 import {ButtonSize} from "./const/BUTTON_SIZE/types/ButtonSize";
 import {ButtonVariant} from "./types/ButtonVariant";
@@ -11,10 +11,10 @@ type Props = {
     onClick?: () => void
 }
 
-export const WrappedButton: FC<PropsWithChildren<Props>> = (props) => {
+export const Button: FC<PropsWithChildren<Props>> = (props) => {
     const {children, size = "md", variant = "outline", disabled, onClick} = props
     return (
-        <Button
+        <ChakraButton
             width={BUTTON_SIZE[size]}
             variant={variant === "danger" ? "outline" : variant}
             borderColor={variant === "danger" ? "red.800" : undefined}
@@ -22,6 +22,6 @@ export const WrappedButton: FC<PropsWithChildren<Props>> = (props) => {
             onClick={onClick}
         >
             {children}
-        </Button>
+        </ChakraButton>
     )
 }

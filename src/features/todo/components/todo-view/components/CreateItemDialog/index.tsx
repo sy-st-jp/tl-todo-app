@@ -1,6 +1,6 @@
 import {Box, Dialog, Input, Portal, Spinner, Text} from "@chakra-ui/react";
 import {FC} from "react";
-import {WrappedButton} from "@/components/wrapped/chakra-ui/ui/button";
+import {Button} from "@/components/ui/button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 
@@ -33,9 +33,9 @@ export const CreateItemDialog: FC<Props> = (props) => {
     return (
         <Dialog.Root open={isOpen} onOpenChange={handleToggle} placement={"center"}>
             <Dialog.Trigger asChild>
-                <WrappedButton variant={"solid"}>
+                <Button variant={"solid"}>
                     新規作成
-                </WrappedButton>
+                </Button>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop/>
@@ -49,8 +49,8 @@ export const CreateItemDialog: FC<Props> = (props) => {
                                 </label>
                             </Dialog.Body>
                             <Dialog.Footer display={"flex"} justifyContent={"center"} gap={8}>
-                                <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
-                                <WrappedButton variant={"solid"} disabled={!title.length} onClick={handleClickCreateButton}>作成</WrappedButton>
+                                <Button onClick={handleToggle}>キャンセル</Button>
+                                <Button variant={"solid"} disabled={!title.length} onClick={handleClickCreateButton}>作成</Button>
                             </Dialog.Footer>
                             {isLoading && <Box position={"absolute"} top={0} right={0} left={0} bottom={0} bg={"whiteAlpha.300"} animationName={"fade-in"} animationDuration={"slow"} zIndex={1} display={"flex"} justifyContent={"center"} alignItems={"center"} cursor={"disabled"}><Spinner size="lg"/></Box>}
                             {error.message && <Text color={"fg.error"}>{error.message}</Text>}

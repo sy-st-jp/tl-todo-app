@@ -1,6 +1,6 @@
 import {Dialog, Input, Portal, Spinner} from "@chakra-ui/react";
 import {FC, useState} from "react";
-import {WrappedButton} from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 import {Todo} from "@/features/todo/types/Todo";
@@ -43,9 +43,9 @@ export const UpdateItemDialog: FC<Props> = (props) => {
     return (
         <Dialog.Root open={isOpen} onOpenChange={handleToggle}>
             <Dialog.Trigger asChild>
-                <WrappedButton>
+                <Button>
                     編集
-                </WrappedButton>
+                </Button>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop/>
@@ -61,8 +61,8 @@ export const UpdateItemDialog: FC<Props> = (props) => {
                                     </label>
                                 </Dialog.Body>
                                 <Dialog.Footer>
-                                    <WrappedButton onClick={handleToggle}>キャンセル</WrappedButton>
-                                    <WrappedButton disabled={!currentTitle.length} onClick={handleClickUpdateButton}>更新</WrappedButton>
+                                    <Button onClick={handleToggle}>キャンセル</Button>
+                                    <Button disabled={!currentTitle.length} onClick={handleClickUpdateButton}>更新</Button>
                                 </Dialog.Footer>
                                 {error.message && <p>{error.message}</p>}
                             </>}
