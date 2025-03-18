@@ -7,7 +7,7 @@ import {useUpdateTodo} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo
 export const useTodo = () => {
     const {data, error: getTodosError, isLoading, isValidating, mutate} = useSWR<Todo[], Error, "getTodos">("getTodos", getTodos)
     const createTodo = useCreateTodo(mutate)
-    const updateTodo = useUpdateTodo(mutate)
+    const updateTodo = useUpdateTodo(data, mutate)
     return {
         todos: data,
         operations: {
