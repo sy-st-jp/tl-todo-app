@@ -12,7 +12,7 @@ export const useTodo = () => {
         todos: data,
         operations: {
             getTodos: {
-                isLoading: isValidating || isLoading,
+                isLoading: isLoading,
                 errorMessage: getTodosError?.message,
             },
             createTodo: {
