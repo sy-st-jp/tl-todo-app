@@ -40,6 +40,14 @@ export const TodoItem: FC<Props> = (props) => {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            await props.deleteTodo.handler(id)
+        } catch (e) {
+            // do nothing
+        }
+    }
+
     return (
         <WrappedTableRow>
             <WrappedTableCell>{id}</WrappedTableCell>
