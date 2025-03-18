@@ -45,7 +45,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
                             <Dialog.Body>
                                 <label>
                                     <Text mb={2}>タイトル</Text>
-                                    <Input px={2} value={title} onChange={handleChangeTitle}/>
+                                    <Input value={title} onChange={handleChangeTitle}/>
                                 </label>
                             </Dialog.Body>
                             <Dialog.Footer display={"flex"} justifyContent={"center"} gap={8}>

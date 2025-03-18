@@ -5,6 +5,7 @@ import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
 import {Todo} from "@/features/todo/types/Todo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
+import {InputText} from "@/components/ui/InputText";
 
 type Props = {
     todo: Todo
@@ -57,7 +58,7 @@ export const UpdateItemDialog: FC<Props> = (props) => {
                                 <Dialog.Body>
                                     <label>
                                         <p>タイトル</p>
-                                        <Input value={currentTitle} onChange={handleChangeTitle}/>
+                                        <InputText value={currentTitle} onChange={handleChangeTitle}/>
                                     </label>
                                 </Dialog.Body>
                                 <Dialog.Footer>
