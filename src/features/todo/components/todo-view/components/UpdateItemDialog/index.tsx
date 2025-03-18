@@ -43,7 +43,7 @@ export const UpdateItemDialog: FC<Props> = (props) => {
     return (
         <Dialog.Root open={isOpen} onOpenChange={handleToggle}>
             <Dialog.Trigger asChild>
-                <WrappedButton variant="outline" size="sm">
+                <WrappedButton px={8} variant="outline" size="sm">
                     編集
                 </WrappedButton>
             </Dialog.Trigger>

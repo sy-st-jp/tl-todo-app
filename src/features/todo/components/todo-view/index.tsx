@@ -11,6 +11,7 @@ import type {Todo} from "../../types/Todo";
 import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
 import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
+import {Box} from "@chakra-ui/react";
 
 type Props = {
     todos?: Todo[];
@@ -50,26 +51,27 @@ export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
     const { getTodos, createTodo, updateTodo, deleteTodo } = operations
     return (
-        <>
-        <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
-        {getTodos.isLoading ? <div>loading...</div> :
-        <WrappedTableRoot>
-            <WrappedTableHeader>
-                <WrappedTableRow>
-                    <WrappedTableColumnHeader>ID</WrappedTableColumnHeader>
-                    <WrappedTableColumnHeader>タイトル</WrappedTableColumnHeader>
-                    <WrappedTableColumnHeader>完了</WrappedTableColumnHeader>
-                </WrappedTableRow>
-            </WrappedTableHeader>
-            <WrappedTableBody>
-                {todos?.length === 0 || !todos ? (
+        <Box display={"flex"} flexDirection={"column"} gap={8}>
+            <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
+            {getTodos.isLoading ? <div>loading...</div> :
+            <WrappedTableRoot>
+                <WrappedTableHeader>
                     <WrappedTableRow>
-                        <WrappedTableCell colSpan={3}>タスクなし</WrappedTableCell>
+                        <WrappedTableColumnHeader w={"20%"} fontWeight="bold">ID</WrappedTableColumnHeader>
+                        <WrappedTableColumnHeader w={"20%"} fontWeight="bold">タイトル</WrappedTableColumnHeader>
+                        <WrappedTableColumnHeader w={"10%"} fontWeight="bold">完了</WrappedTableColumnHeader>
+                        <WrappedTableColumnHeader/>
                     </WrappedTableRow>
-                ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />)
-                }
-            </WrappedTableBody>
-        </WrappedTableRoot>}
-        </>
+                </WrappedTableHeader>
+                <WrappedTableBody>
+                    {todos?.length === 0 || !todos ? (
+                        <WrappedTableRow>
+                            タスクなし
+                        </WrappedTableRow>
+                    ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />)
+                    }
+                </WrappedTableBody>
+            </WrappedTableRoot>}
+        </Box>
     );
 }
