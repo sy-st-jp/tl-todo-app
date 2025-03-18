@@ -130,8 +130,6 @@ paths:
           description: "指定されたタスクは存在しない"
         500:
           description: "予期しないエラー"
-
-  /api/todos/{id}:
     delete:
       tags:
         - "todos"
