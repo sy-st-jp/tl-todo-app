@@ -1,8 +1,9 @@
-import {Box, Dialog, Input, Portal, Spinner, Text} from "@chakra-ui/react";
+import {Box, Dialog, Portal, Spinner, Text} from "@chakra-ui/react";
 import {FC} from "react";
 import {Button} from "@/components/ui/Button";
 import {useInput} from "@/libs/useInput";
 import {useOpen} from "@/libs/useOpen";
+import {InputText} from "@/components/ui/InputText";
 import {VStack} from "@/components/layout/Stack";
 
 type Props = {
@@ -46,7 +47,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
                             <Dialog.Body>
                                 <label>
                                     <Text mb={2}>タイトル</Text>
-                                    <Input value={title} onChange={handleChangeTitle}/>
+                                    <InputText value={title} onChange={handleChangeTitle}/>
                                 </label>
                             </Dialog.Body>
                             <Dialog.Footer display={"flex"} justifyContent={"center"} gap={8}>
