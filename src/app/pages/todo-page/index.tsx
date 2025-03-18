@@ -4,7 +4,7 @@ import {Todo} from "@/features/todo";
 
 export const TodoPage = () => {
     return (
-        <Box p="4">
+        <Box p="8" maxW={"1000px"} textAlign={"center"} margin={"auto"}>
             <Todo />
         </Box>
     )

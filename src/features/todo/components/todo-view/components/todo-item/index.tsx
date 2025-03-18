@@ -56,10 +56,12 @@ export const TodoItem: FC<Props> = (props) => {
             <WrappedTableCell>
                 <input type="checkbox" checked={!!completed} onChange={handleCompleted}/>
             </WrappedTableCell>
-            <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
-            <WrappedButton variant="outline" size="sm" onClick={handleDelete}>
-                削除
-            </WrappedButton>
+            <WrappedTableCell display={"flex"} justifyContent={"end"} gap={4}>
+                <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
+                <WrappedButton variant="outline" px={8} size="sm" onClick={handleDelete}>
+                    削除
+                </WrappedButton>
+            </WrappedTableCell>
         </WrappedTableRow>
     )
 }
