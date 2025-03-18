@@ -13,6 +13,14 @@ type Props = {
             handleClear: () => void
         },
         handler: (config: UpdateConfig) => Promise<void>;
+    },
+    deleteTodo: {
+        isLoading: boolean;
+        error: {
+            message?: string,
+            handleClear: () => void
+        },
+        handler: (id: number) => Promise<void>;
     }
 }
 
