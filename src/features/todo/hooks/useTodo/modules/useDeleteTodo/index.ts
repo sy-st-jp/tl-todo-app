@@ -6,7 +6,7 @@ import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
 import {toast} from "@/components/ui/Toater";
-import {deleteTodo} from "@/features/todo/api/modules/deleteTodo";
+import {deleteTodo} from "@/features/todo/api";
 import {AxiosError} from "axios";
 import {STATUS_MESSAGE} from "@/features/todo/hooks/useTodo/modules/useDeleteTodo/const/STATUS_MESSAGE";
 

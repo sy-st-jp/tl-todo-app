@@ -8,7 +8,7 @@ import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
 import {toast} from "@/components/ui/Toater";
-import {updateTodo} from "@/features/todo/api/modules/updateTodo";
+import {updateTodo} from "@/features/todo/api";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 import {AxiosError} from "axios";
 import {STATUS_MESSAGE} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/const/STATUS_MESSAGE";
