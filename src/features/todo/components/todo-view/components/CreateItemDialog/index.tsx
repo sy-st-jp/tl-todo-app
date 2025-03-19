@@ -34,6 +34,8 @@ export const CreateItemDialog: FC<Props> = (props) => {
         <DialogWithButton
             isOpen={isOpen}
             buttonLabel={"新規作成"}
+            confirmLabel={"作成"}
+            cancelLabel={"キャンセル"}
             buttonVariant={"solid"}
             onConfirm={handleClickCreateButton}
             onToggleIsOpen={handleToggle}
