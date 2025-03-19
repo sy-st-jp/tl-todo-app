@@ -4,7 +4,7 @@ import {createTodo} from "@/features/todo/api";
 import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
-import {toast} from "@/components/ui/toater";
+import {toast} from "@/components/ui/Toater";
 
 export const useCreateTodo = (mutate: KeyedMutator<Todo[]>) => {
     const [errorMessage, setErrorMessage] = useState<string>()

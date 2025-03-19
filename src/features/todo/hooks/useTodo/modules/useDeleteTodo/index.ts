@@ -5,7 +5,7 @@ import {
 import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
-import {toast} from "@/components/ui/toater";
+import {toast} from "@/components/ui/Toater";
 import {deleteTodo} from "@/features/todo/api/modules/deleteTodo";
 
 export const useDeleteTodo = (mutate: KeyedMutator<Todo[]>) => {
