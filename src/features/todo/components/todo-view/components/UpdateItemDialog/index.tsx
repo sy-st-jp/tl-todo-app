@@ -45,6 +45,8 @@ export const UpdateItemDialog: FC<Props> = (props) => {
         <DialogWithButton
             isOpen={isOpen}
             buttonLabel={"編集"}
+            confirmLabel={"更新"}
+            cancelLabel={"キャンセル"}
             onConfirm={handleClickUpdateButton}
             onToggleIsOpen={handleToggle}
             isConfirmable={title.length > 0}
