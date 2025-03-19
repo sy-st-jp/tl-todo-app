@@ -1,10 +1,19 @@
-タイムリープ株式会社のコーディング試験用のリポジトリです。
+# tl-todo-app
+
+## Initial Settings
+First, install dependencies and do some initial setup.
+
+```bash
+npm run init
+```
 
 ## Getting Started
 
-First, run the development server:
+Second, run the development server:
 
 ```bash
-npm i
 npm run dev
 ```
+
+## Design
+[Figma](https://www.figma.com/design/rybtEYmnBileuMeL7feAQF/tl-todo-app)

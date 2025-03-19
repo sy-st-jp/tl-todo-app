@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  description: "Todo アプリケーションの API"
+  version: "1.0.0"
+  title: "Todo API"
+servers:
+  - url: "http://localhost:3000"
+tags:
+  - name: "todos"
+    description: "タスクに関する操作"
+paths:
+  /api/todos:
+    get:
+      tags:
+        - "todos"
+      summary: "タスク一覧取得"
+      responses:
+        200:
+          description: "取得成功"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  required:
+                    - id
+                    - title
+                    - completed
+                  properties:
+                    id:
+                      type: "integer"
+                      example: 1
+                    title:
+                      type: "string"
+                      example: "卵を買う"
+                    completed:
+                      type: "integer"
+                      enum: [0, 1]
+                      example: 0
+        500:
+          description: "予期しないエラー"
+
+    post:
+      tags:
+        - "todos"
+      summary: "タスク新規登録"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              required:
+                - title
+              properties:
+                title:
+                  type: "string"
+                  example: "卵を購⼊する"
+      responses:
+        201:
+          description: "タスクの作成に成功"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                    - id
+                    - title
+                    - completed
+                properties:
+                  id:
+                    type: "integer"
+                    example: 3
+                  title:
+                    type: "string"
+                    example: "卵を購⼊する"
+                  completed:
+                    type: "boolean"
+                    example: false
+        400:
+          description: "入力値が不正"
+        500:
+          description: "予期しないエラー"
+    put:
+      tags:
+        - "todos"
+      summary: "タスク更新 (ID指定)"
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          schema:
+            type: "integer"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                completed:
+                  type: "boolean"
+      responses:
+        200:
+          description: "更新に成功"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                    - message
+                    - id
+                    - changes
+                properties:
+                  message:
+                    type: "string"
+                    example: "Todo updated"
+                  id:
+                    type: "integer"
+                    example: 3
+                  changes:
+                    type: "integer"
+                    example: 1
+        400:
+          description: "入力値が不正"
+        404:
+          description: "指定されたタスクは存在しない"
+        500:
+          description: "予期しないエラー"
+    delete:
+      tags:
+        - "todos"
+      summary: "タスク削除 (ID指定)"
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        200:
+          description: "削除に成功"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                    - message
+                properties:
+                  message:
+                    type: "string"
+                    example: "Todo deleted"
+        400:
+          description: "入力値が不正"
+        404:
+          description: "指定されたタスクは存在しない"
+        500:
+          description: "予期しないエラー"
