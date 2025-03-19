@@ -1,17 +1,14 @@
-import React, {FC} from "react";
-import {
-    WrappedTableBody,
-    WrappedTableCell,
-    WrappedTableColumnHeader,
-    WrappedTableHeader,
-    WrappedTableRoot,
-    WrappedTableRow
-} from "@/components/wrapped/chakra-ui/ui/table";
-import type {Todo} from "../../types/Todo";
+import {ChangeEvent, FC} from "react";
+import {Table, TableItem} from "@/components/ui/table";
 import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
-import {TodoItem} from "@/features/todo/components/todo-view/components/todo-item";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
-import {VStack} from "@/components/layout/Stack";
+import {HStack, VStack} from "@/components/layout/Stack";
+import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/UpdateItemDialog";
+import {Button} from "@/components/ui/Button";
+import {Checkbox} from "@/components/ui/Checkbox";
+import {COLUMNS} from "./const/COLUMNS";
+import {Spinner} from "@chakra-ui/react";
+import type {Todo} from "../../types/Todo";
 
 type Props = {
     todos?: Todo[];
@@ -50,28 +47,52 @@ type Props = {
 export const TodoView: FC<Props> = (props) => {
     const { todos, operations } = props
     const { getTodos, createTodo, updateTodo, deleteTodo } = operations
+
+    const handleCompleted = (id: number) => async (e: ChangeEvent<HTMLInputElement>) => {
+        try {
+            await updateTodo.handler({
+                type: "completed",
+                id: id,
+                completed: e.target.checked
+            })
+        } catch (e) {
+            // do nothing
+        }
+    }
+
+    const handleDelete = (id: number) => async () => {
+        try {
+            await deleteTodo.handler(id)
+        } catch (e) {
+            // do nothing
+        }
+    }
     return (
         <VStack gap={24}>
             <CreateItemDialog isLoading={createTodo.isLoading} onClickCreateButton={createTodo.handler} error={createTodo.error}/>
-            {getTodos.isLoading ? <div>loading...</div> :
-            <WrappedTableRoot>
-                <WrappedTableHeader>
-                    <WrappedTableRow>
-                        <WrappedTableColumnHeader w={"20%"} fontWeight="bold">ID</WrappedTableColumnHeader>
-                        <WrappedTableColumnHeader w={"20%"} fontWeight="bold">タイトル</WrappedTableColumnHeader>
-                        <WrappedTableColumnHeader w={"10%"} fontWeight="bold">完了</WrappedTableColumnHeader>
-                        <WrappedTableColumnHeader/>
-                    </WrappedTableRow>
-                </WrappedTableHeader>
-                <WrappedTableBody>
-                    {todos?.length === 0 || !todos ? (
-                        <WrappedTableRow>
-                            タスクなし
-                        </WrappedTableRow>
-                    ) : todos.map((todo, index) => <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />)
-                    }
-                </WrappedTableBody>
-            </WrappedTableRoot>}
+            <Table
+                columns={COLUMNS}
+                data={todos}
+                isLoading={getTodos.isLoading}
+                EmptyElement={<p>タスクなし</p>}
+                LoadingElement={<Spinner/>}
+                renderItem={(todo) => (
+                    <TableItem
+                        cells={{
+                            id: todo.id,
+                            title: todo.title,
+                            completed: <Checkbox checked={!!todo.completed} onChange={handleCompleted(todo.id)}/>
+                        }}
+                        option={
+                            <HStack gap={24} justifyContent={"flex-end"}>
+                                <UpdateItemDialog todo={todo} isLoading={updateTodo.isLoading} onClickUpdateButton={updateTodo.handler} error={updateTodo.error}/>
+                                <Button variant={"danger"} onClick={handleDelete(todo.id)}>
+                                    削除
+                                </Button>
+                            </HStack>
+                        } />
+                )}
+            />
         </VStack>
     );
 }
