@@ -1,10 +1,9 @@
-import {Box, Dialog, Portal, Spinner, Text} from "@chakra-ui/react";
 import {FC} from "react";
-import {Button} from "@/components/ui/Button";
 import {useInput} from "@/libs/useInput";
+import {DialogWithButton} from "@/components/ui/DialogWithButton";
 import {useOpen} from "@/libs/useOpen";
 import {InputText} from "@/components/ui/InputText";
-import {VStack} from "@/components/layout/Stack";
+import {Text} from "@chakra-ui/react";
 
 type Props = {
     onClickCreateButton: (title: string) => Promise<void>
@@ -33,33 +32,20 @@ export const CreateItemDialog: FC<Props> = (props) => {
         }
     }
     return (
-        <Dialog.Root open={isOpen} onOpenChange={handleToggle} placement={"center"}>
-            <Dialog.Trigger asChild>
-                <Button variant={"solid"}>
-                    新規作成
-                </Button>
-            </Dialog.Trigger>
-            <Portal>
-                <Dialog.Backdrop/>
-                <Dialog.Positioner>
-                    <Dialog.Content p={8}>
-                        <VStack gap={24}>
-                            <Dialog.Body>
-                                <label>
-                                    <Text mb={2}>タイトル</Text>
-                                    <InputText value={title} onChange={handleChangeTitle}/>
-                                </label>
-                            </Dialog.Body>
-                            <Dialog.Footer display={"flex"} justifyContent={"center"} gap={8}>
-                                <Button onClick={handleToggle}>キャンセル</Button>
-                                <Button variant={"solid"} disabled={!title.length} onClick={handleClickCreateButton}>作成</Button>
-                            </Dialog.Footer>
-                            {isLoading && <Box position={"absolute"} top={0} right={0} left={0} bottom={0} bg={"whiteAlpha.300"} animationName={"fade-in"} animationDuration={"slow"} zIndex={1} display={"flex"} justifyContent={"center"} alignItems={"center"} cursor={"disabled"}><Spinner size="lg"/></Box>}
-                            {error.message && <Text color={"fg.error"}>{error.message}</Text>}
-                        </VStack>
-                    </Dialog.Content>
-                </Dialog.Positioner>
-            </Portal>
-        </Dialog.Root>
+        <DialogWithButton
+            isOpen={isOpen}
+            buttonLabel={"新規作成"}
+            buttonVariant={"solid"}
+            onConfirm={handleClickCreateButton}
+            onToggleIsOpen={handleToggle}
+            isConfirmable={title.length > 0}
+            isLoading={isLoading}
+            errorMessage={error.message}
+        >
+            <label>
+                <Text mb={2}>タイトル</Text>
+                <InputText value={title} onChange={handleChangeTitle}/>
+            </label>
+        </DialogWithButton>
     )
 }
