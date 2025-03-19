@@ -1,4 +1,4 @@
-import {Column} from "@/components/ui/table";
+import {Column} from "@/components/ui/Table";
 import type {Todo} from "@/features/todo/types/Todo";
 
 export const COLUMNS: Column<Todo>[] = [{

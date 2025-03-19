@@ -1,5 +1,5 @@
 import {ChangeEvent, FC} from "react";
-import {Table, TableItem} from "@/components/ui/table";
+import {Table, TableItem} from "@/components/ui/Table";
 import {CreateItemDialog} from "@/features/todo/components/todo-view/components/CreateItemDialog";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 import {HStack, VStack} from "@/components/layout/Stack";
