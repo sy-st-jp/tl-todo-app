@@ -75,7 +75,7 @@ export const TodoView: FC<Props> = (props) => {
                 data={todos}
                 isLoading={getTodos.isLoading}
                 EmptyElement={<p>タスクなし</p>}
-                LoadingElement={<Spinner/>}
+                LoadingElement={<HStack justifyContent={"center"}><Spinner/></HStack>}
                 renderItem={(todo) => (
                     <TableItem
                         cells={{

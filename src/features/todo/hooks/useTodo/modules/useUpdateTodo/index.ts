@@ -10,6 +10,8 @@ import {useState} from "react";
 import {toast} from "@/components/ui/Toater";
 import {updateTodo} from "@/features/todo/api/modules/updateTodo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
+import {AxiosError} from "axios";
+import {STATUS_MESSAGE} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/const/STATUS_MESSAGE";
 
 export const useUpdateTodo = (data: Todo[]|undefined, mutate: KeyedMutator<Todo[]>) => {
     const [errorMessage, setErrorMessage] = useState<string>()
@@ -24,11 +26,19 @@ export const useUpdateTodo = (data: Todo[]|undefined, mutate: KeyedMutator<Todo[
             case "title":
                 await trigger({request: {title: config.title}, param: {id: config.id}},{
                     onSuccess: async () => {
-                        toast.create("タスクを更新しました", undefined, "success")
+                        toast.create(STATUS_MESSAGE["200"], undefined, "success")
                         await mutate()
                     },
-                    onError: () => {
-                        setErrorMessage("タスクの更新に失敗しました。時間を置いて再度お試しください。")
+                    onError: (e) => {
+                        if(e instanceof AxiosError) {
+                            switch (e.response?.status) {
+                                case 400:
+                                    return setErrorMessage(STATUS_MESSAGE["400"])
+                                case 404:
+                                    return setErrorMessage(STATUS_MESSAGE["404"])
+                            }
+                        }
+                        return setErrorMessage(STATUS_MESSAGE["default"])
                     }
                 })
                 break
@@ -48,7 +58,7 @@ export const useUpdateTodo = (data: Todo[]|undefined, mutate: KeyedMutator<Todo[
 
                 await trigger({request: {completed: config.completed}, param: {id: config.id}},{
                     onError: () => {
-                        toast.create("タスクの更新に失敗しました。時間を置いて再度お試しください。", undefined, "error")
+                        toast.create(STATUS_MESSAGE["default"], undefined, "error")
                         mutate(prevData, false);
                     }
                 })
