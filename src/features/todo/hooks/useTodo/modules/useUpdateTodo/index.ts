@@ -7,7 +7,7 @@ import {
 import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
-import {toast} from "@/components/ui/toater";
+import {toast} from "@/components/ui/Toater";
 import {updateTodo} from "@/features/todo/api/modules/updateTodo";
 import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
 
