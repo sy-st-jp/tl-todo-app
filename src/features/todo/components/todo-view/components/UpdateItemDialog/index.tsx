@@ -2,10 +2,9 @@ import {FC, useState} from "react";
 import {useInput} from "@/libs/useInput";
 import {DialogWithButton} from "@/components/ui/DialogWithButton";
 import {useOpen} from "@/libs/useOpen";
-import {InputText} from "@/components/ui/InputText";
-import {Text} from "@chakra-ui/react";
-import {UpdateConfig} from "@/features/todo/hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
-import {Todo} from "@/features/todo/types/Todo";
+import {UpdateConfig} from "../../../../hooks/useTodo/modules/useUpdateTodo/type/UpdateConfig";
+import {Todo} from "../../../../types/Todo";
+import {TitleField} from "../shared/TitleField";
 
 type Props = {
     todo: Todo
@@ -52,10 +51,7 @@ export const UpdateItemDialog: FC<Props> = (props) => {
             isLoading={isLoading}
             errorMessage={error.message}
         >
-            <label>
-                <Text mb={2}>タイトル</Text>
-                <InputText value={currentTitle} onChange={handleChangeTitle}/>
-            </label>
+            <TitleField title={currentTitle} handleChangeTitle={handleChangeTitle} />
         </DialogWithButton>
     )
 }

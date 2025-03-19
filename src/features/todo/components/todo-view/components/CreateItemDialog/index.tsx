@@ -2,8 +2,7 @@ import {FC} from "react";
 import {useInput} from "@/libs/useInput";
 import {DialogWithButton} from "@/components/ui/DialogWithButton";
 import {useOpen} from "@/libs/useOpen";
-import {InputText} from "@/components/ui/InputText";
-import {Text} from "@chakra-ui/react";
+import {TitleField} from "../shared/TitleField";
 
 type Props = {
     onClickCreateButton: (title: string) => Promise<void>
@@ -42,10 +41,7 @@ export const CreateItemDialog: FC<Props> = (props) => {
             isLoading={isLoading}
             errorMessage={error.message}
         >
-            <label>
-                <Text mb={2}>タイトル</Text>
-                <InputText value={title} onChange={handleChangeTitle}/>
-            </label>
+            <TitleField title={title} handleChangeTitle={handleChangeTitle} />
         </DialogWithButton>
     )
 }
