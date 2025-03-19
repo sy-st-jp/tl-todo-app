@@ -7,6 +7,8 @@ import {KeyedMutator} from "swr";
 import {useState} from "react";
 import {toast} from "@/components/ui/Toater";
 import {deleteTodo} from "@/features/todo/api/modules/deleteTodo";
+import {AxiosError} from "axios";
+import {STATUS_MESSAGE} from "@/features/todo/hooks/useTodo/modules/useDeleteTodo/const/STATUS_MESSAGE";
 
 export const useDeleteTodo = (mutate: KeyedMutator<Todo[]>) => {
     const [errorMessage, setErrorMessage] = useState<string>()
@@ -18,11 +20,17 @@ export const useDeleteTodo = (mutate: KeyedMutator<Todo[]>) => {
     const handleDeleteTodo = async (id: number) => {
         await trigger({param: {id: id}},{
             onSuccess: async () => {
-                toast.create("タスクを削除しました", undefined, "success")
+                toast.create(STATUS_MESSAGE["201"], undefined, "success")
                 await mutate()
             },
-            onError: () => {
-                toast.create("タスクの削除に失敗しました。時間を置いて再度お試しください。", undefined, "error")
+            onError: (e) => {
+                if(e instanceof AxiosError) {
+                    switch (e.response?.status) {
+                        case 404:
+                            return toast.create(STATUS_MESSAGE[e.response.status], undefined, "error")
+                    }
+                }
+                return toast.create(STATUS_MESSAGE["default"], undefined, "error")
             }
         })
     }

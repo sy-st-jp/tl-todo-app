@@ -5,6 +5,8 @@ import {Todo} from "@/features/todo/types/Todo";
 import {KeyedMutator} from "swr";
 import {useState} from "react";
 import {toast} from "@/components/ui/Toater";
+import {AxiosError} from "axios";
+import {STATUS_MESSAGE} from "@/features/todo/hooks/useTodo/modules/useCreateTodo/const/STATUS_MESSAGE";
 
 export const useCreateTodo = (mutate: KeyedMutator<Todo[]>) => {
     const [errorMessage, setErrorMessage] = useState<string>()
@@ -13,11 +15,17 @@ export const useCreateTodo = (mutate: KeyedMutator<Todo[]>) => {
         return await createTodo(arg)
     }, {
         onSuccess: async () => {
-            toast.create("タスクを作成しました", undefined, "success")
+            toast.create(STATUS_MESSAGE["201"], undefined, "success")
             await mutate()
         },
-        onError: () => {
-            setErrorMessage("タスクの作成に失敗しました。時間を置いて再度お試しください。")
+        onError: (e) => {
+            if(e instanceof AxiosError) {
+                switch (e.response?.status) {
+                    case 400:
+                        return setErrorMessage(STATUS_MESSAGE[e.response.status])
+                }
+            }
+            return setErrorMessage(STATUS_MESSAGE["default"])
         }
     })
     const handleCreateTodo = async (title: string) => {
