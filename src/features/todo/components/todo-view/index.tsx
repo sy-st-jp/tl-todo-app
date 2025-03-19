@@ -7,8 +7,8 @@ import {UpdateItemDialog} from "@/features/todo/components/todo-view/components/
 import {Button} from "@/components/ui/Button";
 import {Checkbox} from "@/components/ui/Checkbox";
 import {COLUMNS} from "./const/COLUMNS";
-import {Spinner} from "@chakra-ui/react";
 import type {Todo} from "../../types/Todo";
+import {Spinner} from "@/components/ui/Spinner";
 
 type Props = {
     todos?: Todo[];
