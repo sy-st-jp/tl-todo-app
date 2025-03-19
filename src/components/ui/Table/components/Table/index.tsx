@@ -16,7 +16,7 @@ export const Table = <T extends {id: string | number},>(props: Props<T>) => {
     if (isLoading) {
         return LoadingElement;
     }
-    if (!data) {
+    if (!data || data.length === 0) {
         return EmptyElement;
     }
     return (
